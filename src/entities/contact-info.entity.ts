@@ -13,11 +13,16 @@ export class ContactInfo{
     @Column({nullable: true})
     phone: string;
 
+    @Column()
+    email: string;
+ 
     // relation one to one with employee
-    @OneToOne( ()=> Employee, employee => employee.contactInfo)
-    @JoinColumn() // JoinColmn tells us where is the relationship id created
-                  // in the other entity it'll be has a employeeId column 
- // المكان اللي هحط فيه الجوين هو المكان اللي هيحتوي علي relation id & FK 
+    // 3rd param means that if this employee got deleted CASCADE, that delete to this (contactInfo) record
+    @OneToOne( ()=> Employee, employee => employee.contactInfo , {onDelete: 'CASCADE'}) 
+    // JoinColmn tells us where is the relationship id created
+    // in the other entity it'll be has a employeeId column 
+    // المكان اللي هحط فيه الجوين هو المكان اللي هيحتوي علي relation id & FK 
+    @JoinColumn() 
     employee: Employee;
 
 }
