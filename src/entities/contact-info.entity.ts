@@ -7,14 +7,17 @@ export class ContactInfo{
     @PrimaryGeneratedColumn()
     id: number; // represent as a int(11) in database
 
-    @Column()
+    @Column({nullable: true})
     name: string; // represent as a varchar(255) in database
 
     @Column({nullable: true})
     phone: string;
 
-    @Column()
+    @Column({nullable: true})
     email: string;
+
+    @Column()
+    employeeId: number;
  
     // relation one to one with employee
     // 3rd param means that if this employee got deleted CASCADE, that delete to this (contactInfo) record

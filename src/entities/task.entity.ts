@@ -6,7 +6,7 @@ export class Task {
     @PrimaryGeneratedColumn()
     id: number; // represent as a int(11) in database
 
-    @Column()
+    @Column({nullable: true})
     name: string; // represent as a varchar(255) in database
 
     // relation Many to one with employee
