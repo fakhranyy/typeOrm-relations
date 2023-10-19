@@ -1,4 +1,4 @@
-import { Column, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ContactInfo } from "./contact-info.entity";
 import { Task } from "./task.entity";
 
@@ -10,6 +10,13 @@ export class Employee {
     @Column()
     name: string; // represent as a varchar(255) in database
 
+    // @Column()
+     @ManyToOne(()=> Employee, employee => employee.directReports, {onDelete :'SET NULL'} ) // many employees mapped to one manger
+     manger: Employee; // self referencing because the two sides of relation are in the same class , side 1 
+
+     @OneToMany(() => Employee , employee => employee.manger) 
+    directReports: Employee; // self referencing because the two sides of relation are in the same class , side 2 
+
     // relation one to one with contactInfo
     @OneToOne(()=> ContactInfo, contactInfo => contactInfo.employee)
     contactInfo: ContactInfo;
@@ -18,4 +25,4 @@ export class Employee {
     @OneToMany(()=> Task, task => task.employee )
     tasks: Task[];
     
-}
+} 
