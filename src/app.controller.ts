@@ -8,7 +8,8 @@ export class AppController {
   @Get()
   async seeding(): Promise<any> {
     // return this.appService.getHello();
-    await this.appService.seed();
-    return 'seed complete';
+    // await this.appService.seed();
+    return this.appService.getEmployeeById(1);
+    // return 'seed complete';
   }
 }

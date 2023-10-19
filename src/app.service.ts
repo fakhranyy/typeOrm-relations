@@ -49,6 +49,12 @@ export class AppService {
     await this.empRepo.save(manger);
   }
 
+
+   getEmployeeById(id: number){
+    console.log(id);
+     return this.empRepo.findOne({where: {id: id}, relations: ['manger','tasks','directReports','contactInfo', 'meetings'] }) // find() => select all
+  }
+
   getHello(): string {
     return 'Hello World!';
   }
