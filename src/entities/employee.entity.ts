@@ -1,6 +1,7 @@
-import { Column, Entity, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinTable, ManyToMany, ManyToOne, OneToMany, OneToOne, PrimaryGeneratedColumn } from "typeorm";
 import { ContactInfo } from "./contact-info.entity";
 import { Task } from "./task.entity";
+import { Meeting } from "./meeting.entity";
 
 @Entity()
 export class Employee { 
@@ -24,5 +25,9 @@ export class Employee {
     // relation one to Many with Task
     @OneToMany(()=> Task, task => task.employee )
     tasks: Task[];
+
+    @ManyToMany(() => Meeting, meeting => meeting.attendees) // manyToMany automatically cascade by default
+    @JoinTable() // joinTable required for many to many relations , you must put it on one (owning) side of relation
+    meetings: Meeting[];
     
 } 
